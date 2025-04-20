@@ -16,12 +16,14 @@
 #include "window.hpp"
 
 //kalavideo
-#include "ui_core.hpp"
-#include "ui_video.hpp"
+#include "ui/ui_core.hpp"
+#include "ui/ui_video.hpp"
+#include "internal/ui_internal.hpp"
 
 using std::cout;
 
 using KalaKit::KalaWindow;
+using Internal::UI_Internal;
 
 namespace UI
 {
@@ -156,6 +158,9 @@ namespace UI
 		{
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplWin32_NewFrame();
+
+			UI_Internal::UpdateImGuiInput();
+
 			ImGui::NewFrame();
 
 			//
@@ -168,6 +173,7 @@ namespace UI
 			// TOP BAR END
 			//
 
+			/*
 			if (ImGui::GetIO().ConfigFlags 
 				& ImGuiConfigFlags_DockingEnable)
 			{
@@ -176,6 +182,7 @@ namespace UI
 
 				ImGui::DockSpaceOverViewport(0, viewport, dockFlags);
 			}
+			*/
 		
 			//
 			// UI CONTENT START

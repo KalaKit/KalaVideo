@@ -12,7 +12,7 @@
 #include "platform.hpp"
 
 //kalavideo
-#include "triangle.hpp"
+#include "graphics/triangle.hpp"
 
 using std::filesystem::path;
 using std::filesystem::current_path;

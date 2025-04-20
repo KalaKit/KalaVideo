@@ -64,9 +64,8 @@ if (KALAKIT_WINDOWS)
 endif()
 
 # Project files
-set(CORE_DIR "${CMAKE_SOURCE_DIR}/include/core")
-set(GRAPHICS_DIR "${CMAKE_SOURCE_DIR}/include/graphics")
-set(UI_DIR "${CMAKE_SOURCE_DIR}/include/ui")
+set(VIDEO_SRC_DIR "${CMAKE_SOURCE_DIR}/src")
+set(VIDEO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
 
 # External files
 set(EXT_WINDOW_DIR "${CMAKE_SOURCE_DIR}/_external_shared/KalaWindow")
@@ -105,8 +104,8 @@ endif()
 
 # Add your source files
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS
-	${CMAKE_SOURCE_DIR}/src/*.cpp
-	${CMAKE_SOURCE_DIR}/src/*/*.cpp
+	${VIDEO_SRC_DIR}/*.cpp
+	${VIDEO_SRC_DIR}/*/*.cpp
 	
 	# External source files
 	${EXT_IMGUI_DIR}/imgui.cpp
@@ -131,9 +130,7 @@ set_target_properties(KalaVideo PROPERTIES OUTPUT_NAME "KalaVideo")
 target_compile_features(KalaVideo PRIVATE cxx_std_20)
 
 target_include_directories(KalaVideo PRIVATE
-	${CORE_DIR}
-	${GRAPHICS_DIR}
-	${UI_DIR}
+	${VIDEO_INCLUDE_DIR}
 
 	#External headers
 	${EXT_WINDOW_DIR}

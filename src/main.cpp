@@ -4,7 +4,7 @@
 //Read LICENSE.md for more information.
 
 //kalavideo
-#include "core.hpp"
+#include "core/core.hpp"
 
 using Core::KalaVideo;
 

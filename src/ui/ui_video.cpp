@@ -9,8 +9,8 @@
 #include "imgui.h"
 
 //kalavideo
-#include "ui_video.hpp"
-#include "ui_core.hpp"
+#include "ui/ui_video.hpp"
+#include "ui/ui_core.hpp"
 
 using std::cout;
 
@@ -38,11 +38,8 @@ namespace UI
 		ImGuiWindowFlags winFlags =
 			ImGuiWindowFlags_NoCollapse;
 
-		if (ImGui::Begin("Video"), NULL, winFlags)
-		{
-			ImGui::Text("this is the main KalaVideo window.");
-
-			ImGui::End();
-		}
+		ImGui::Begin("Video", nullptr, winFlags);
+		ImGui::Text("this is the main KalaVideo window.");
+		ImGui::End();
 	}
 }

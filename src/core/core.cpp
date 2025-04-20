@@ -15,9 +15,9 @@
 #include "enums.hpp"
 
 //kalavideo
-#include "core.hpp"
-#include "triangle.hpp"
-#include "ui_core.hpp"
+#include "core/core.hpp"
+#include "graphics/triangle.hpp"
+#include "ui/ui_core.hpp"
 
 using std::cout;
 using std::cin;
