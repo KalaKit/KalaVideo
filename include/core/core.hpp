@@ -9,14 +9,15 @@
 #include <Windows.h>
 #endif
 
-namespace Project
+namespace Core
 {
-	class Core
+	class KalaVideo
 	{
 	public:
 		static void Initialize();
 		static void Update();
 		static void RedrawCallback();
+		static void Shutdown();
 	private:
 #ifdef KALAKIT_WINDOWS
 		static inline HDC hdc;

@@ -3,16 +3,16 @@
 //This is free software, and you are welcome to redistribute it under certain conditions.
 //Read LICENSE.md for more information.
 
-//kalavideo
-#include "core.hpp"
+#pragma once
 
-using Core::KalaVideo;
-
-int main()
+namespace UI
 {
-	KalaVideo::Initialize();
-	KalaVideo::Update();
-	KalaVideo::Shutdown();
-	
-	return 0;
+	class UI_Video
+	{
+	public:
+		/// <summary>
+		/// The main window that displays the video currently loaded into KalaVideo.
+		/// </summary>
+		static void DrawVideoWindow();
+	};
 }

@@ -14,9 +14,10 @@
 #include "opengl_loader.hpp"
 #include "enums.hpp"
 
-//project
+//kalavideo
 #include "core.hpp"
 #include "triangle.hpp"
+#include "ui_core.hpp"
 
 using std::cout;
 using std::cin;
@@ -27,20 +28,21 @@ using KalaKit::KalaWindow;
 using KalaKit::OpenGL;
 using KalaKit::OpenGLLoader;
 using KalaKit::DebugType;
-using Graphics::Triangle;
 using KalaKit::PopupAction;
 using KalaKit::PopupType;
 using KalaKit::PopupResult;
+using Graphics::Triangle;
+using UI::UI_Core;
 
-namespace Project
+namespace Core
 {
-	void Core::Initialize()
+	void KalaVideo::Initialize()
 	{
 		//KalaWindow::SetDebugType(DebugType::DEBUG_FREETYPE_FONT_TEST);
 
 		bool initializeOpenGL = true;
 		bool initialized = KalaWindow::Initialize(
-			"window", 
+			"KalaVideo", 
 			800, 
 			600,
 			initializeOpenGL);
@@ -66,15 +68,17 @@ namespace Project
 			OpenGLLoader::glDisablePtr(GL_CULL_FACE);  //don't discard faces
 			OpenGLLoader::glDisablePtr(GL_DEPTH_TEST); //no depth test
 	
-			Triangle::Initialize();
+			//Triangle::Initialize();
 	
 			KalaWindow::SetRedrawCallback(RedrawCallback);
 		}
+
+		UI_Core::Initialize();
 	}
 		
-	void Core::Update()
+	void KalaVideo::Update()
 	{
-		cout << "!!!!! UPDATE START !!!!!\n";
+		cout << "[KALAKIT_VIDEO | DEBUG] Successfully reached render loop!\n";
 
 		while (!KalaWindow::ShouldClose())
 		{
@@ -82,17 +86,24 @@ namespace Project
 
 			if (OpenGL::isInitialized) RedrawCallback();
 		}
-
-		cout << "!!!!! UPDATE END !!!!!\n";
 	}
 
-	void Core::RedrawCallback()
+	void KalaVideo::RedrawCallback()
 	{
 		OpenGLLoader::glClearColorPtr(0.1f, 0.1f, 0.1f, 1.0f); //dark gray
 		OpenGLLoader::glClearPtr(GL_COLOR_BUFFER_BIT);
 
-		Triangle::Render();
+		//Triangle::Render();
+
+		UI_Core::Update();
 
 		KalaWindow::SwapOpenGLBuffers();
+	}
+
+	void KalaVideo::Shutdown()
+	{
+		UI_Core::Shutdown();
+
+		cout << "[KALAKIT_VIDEO | DEBUG] Successfully shut down KalaVideo!\n";
 	}
 }

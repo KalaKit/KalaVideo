@@ -11,7 +11,7 @@
 #include "opengl_loader.hpp"
 #include "platform.hpp"
 
-//project
+//kalavideo
 #include "triangle.hpp"
 
 using std::filesystem::path;
