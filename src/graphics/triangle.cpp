@@ -34,20 +34,20 @@ namespace Graphics
 			 0.5f, -0.5f  //bottom right
 		};
 
-		OpenGLLoader::glGenVertexArraysPtr(1, &vao);
-		OpenGLLoader::glGenBuffersPtr(1, &vbo);
+		OpenGLLoader::glGenVertexArrays(1, &vao);
+		OpenGLLoader::glGenBuffers(1, &vbo);
 
-		OpenGLLoader::glBindVertexArrayPtr(vao);
+		OpenGLLoader::glBindVertexArray(vao);
 
-		OpenGLLoader::glBindBufferPtr(GL_ARRAY_BUFFER, vbo);
-		OpenGLLoader::glBufferDataPtr(
+		OpenGLLoader::glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		OpenGLLoader::glBufferData(
 			GL_ARRAY_BUFFER, 
 			sizeof(vertices), 
 			vertices,
 			GL_STATIC_DRAW);
 
-		OpenGLLoader::glEnableVertexAttribArrayPtr(0);
-		OpenGLLoader::glVertexAttribPointerPtr(
+		OpenGLLoader::glEnableVertexAttribArray(0);
+		OpenGLLoader::glVertexAttribPointer(
 			0,
 			2,
 			GL_FLOAT,
@@ -55,7 +55,7 @@ namespace Graphics
 			2 * sizeof(float),
 			(void*)0);
 
-		OpenGLLoader::glBindVertexArrayPtr(0);
+		OpenGLLoader::glBindVertexArray(0);
 
 		//create shader
 		string vert = (current_path() / "files" / "shaders" / "tri.vert").string();
@@ -77,9 +77,9 @@ namespace Graphics
 		shader->SetVec4("u_Color", kvec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 		//bind the VAO
-		OpenGLLoader::glBindVertexArrayPtr(vao);
+		OpenGLLoader::glBindVertexArray(vao);
 
 		//draw the triangle
-		OpenGLLoader::glDrawArraysPtr(GL_TRIANGLES, 0, 3);
+		OpenGLLoader::glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 }

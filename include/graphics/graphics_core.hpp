@@ -5,21 +5,19 @@
 
 #pragma once
 
-#ifdef KALAKIT_WINDOWS
-#include <Windows.h>
-#endif
-
-namespace Core
+namespace Graphics
 {
-	class KalaVideo
+	class Graphics_Core
 	{
 	public:
+		static inline unsigned int framebuffer;
+		static inline unsigned int textureColorBuffer;
+		static inline unsigned int rbo;
+
 		static void Initialize();
 		static void Update();
-		static void Shutdown();
+
 	private:
-#ifdef KALAKIT_WINDOWS
-		static inline HDC hdc;
-#endif
+		static void FramebufferSetup();
 	};
 }
