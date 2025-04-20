@@ -18,28 +18,31 @@ namespace UI
 {
 	static ImVec2 windowMinSize = ImVec2(300, 300);
 	static ImVec2 windowMaxSize = ImVec2(FLT_MAX, FLT_MAX);
-	static ImVec2 windowSize = ImVec2(400, 400);
 
 	void UI_Video::DrawVideoWindow()
 	{
 		ImGui::SetNextWindowSizeConstraints(
 			windowMinSize,
 			windowMaxSize);
+
+		ImVec2 size = ImGui::GetMainViewport()->Size;
+		float targetHeight = size.y * 0.85f;
 		ImGui::SetNextWindowSize(
-			windowSize,
-			ImGuiCond_FirstUseEver);
-		kvec2 windowSizeKvec2 = kvec2(windowSize.x, windowSize.y);
-		kvec2 centerPosKvec2 = UI_Core::CenterWindow(windowSizeKvec2);
-		ImVec2 centerPos = ImVec2(centerPosKvec2.x, centerPosKvec2.y);
+			ImVec2(size.x, targetHeight),
+			ImGuiCond_Always);
 		ImGui::SetNextWindowPos(
-			centerPos,
-			ImGuiCond_FirstUseEver);
+			ImVec2(0, 0),
+			ImGuiCond_Always);
 
 		ImGuiWindowFlags winFlags =
-			ImGuiWindowFlags_NoCollapse;
+			ImGuiWindowFlags_NoCollapse
+			| ImGuiWindowFlags_NoResize
+			| ImGuiWindowFlags_NoSavedSettings;
 
-		ImGui::Begin("Video", nullptr, winFlags);
-		ImGui::Text("this is the main KalaVideo window.");
-		ImGui::End();
+		if (ImGui::Begin("Video", nullptr, winFlags))
+		{
+			ImGui::Text("this is the main KalaVideo window.");
+			ImGui::End();
+		}
 	}
 }

@@ -34,8 +34,6 @@ namespace UI
 		ImGui::SetCurrentContext(ImGui::GetCurrentContext());
 		ImGuiIO& io = ImGui::GetIO();
 
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-
 #ifdef KALAKIT_WINDOWS
 		kwindow window = KalaWindow::GetWindow();
 		HWND correctWindow = reinterpret_cast<HWND>(window);
@@ -172,17 +170,6 @@ namespace UI
 			//
 			// TOP BAR END
 			//
-
-			/*
-			if (ImGui::GetIO().ConfigFlags 
-				& ImGuiConfigFlags_DockingEnable)
-			{
-				ImGuiViewport* viewport = ImGui::GetMainViewport();
-				ImGuiDockNodeFlags dockFlags = ImGuiDockNodeFlags_PassthruCentralNode;
-
-				ImGui::DockSpaceOverViewport(0, viewport, dockFlags);
-			}
-			*/
 		
 			//
 			// UI CONTENT START
