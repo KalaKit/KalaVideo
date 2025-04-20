@@ -7,6 +7,7 @@
 
 #include <memory>
 
+#include "platform.hpp"
 #include "shader.hpp"
 
 namespace Graphics
@@ -24,5 +25,14 @@ namespace Graphics
 		static inline GLuint vao;
 		static inline GLuint vbo;
 		static inline unique_ptr<Shader> shader;
+	
+		static kmat4 Orthographic(
+			float left,
+			float right,
+			float bottom,
+			float top,
+			float nearZ,
+			float farZ
+		);
 	};
 }

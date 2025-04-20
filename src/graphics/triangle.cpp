@@ -9,10 +9,13 @@
 
 //external
 #include "opengl_loader.hpp"
-#include "platform.hpp"
 
 //kalavideo
 #include "graphics/triangle.hpp"
+#include "ui/ui_video.hpp"
+
+using KalaKit::OpenGLLoader;
+using UI::UI_Video;
 
 using std::filesystem::path;
 using std::filesystem::current_path;
@@ -21,17 +24,58 @@ using std::cout;
 using std::hex;
 using std::make_unique;
 
-using KalaKit::OpenGLLoader;
-
 namespace Graphics
 {
+	kmat4 Triangle::Orthographic(
+		float left,
+		float right,
+		float bottom,
+		float top,
+		float nearZ,
+		float farZ
+	)
+	{
+		kmat4 result{};
+
+		float rl = right - left;
+		float tb = top - bottom;
+		float fn = farZ - nearZ;
+
+		result.columns[0] = kvec4(
+			2.0f / rl, 
+			0.0f, 
+			0.0f, 
+			0.0f
+		);
+		result.columns[1] = kvec4(
+			0.0f, 
+			2.0f / tb, 
+			0.0f, 
+			0.0f
+		);
+		result.columns[2] = kvec4(
+			0.0f, 
+			0.0f, 
+			-2.0f / fn, 
+			0.0f
+		);
+		result.columns[3] = kvec4(
+			-(right + left) / rl,
+			-(top + bottom) / tb,
+			-(farZ + nearZ) / fn,
+			1.0f
+		);
+
+		return result;
+	}
+
 	void Triangle::Initialize()
 	{
-		float vertices[] =
+		float vertices[] = 
 		{
-			 0.0f,  0.5f, //top
-			-0.5f, -0.5f, //bottom left
-			 0.5f, -0.5f  //bottom right
+			300.0f, 100.0f,  // top
+			200.0f, 300.0f,  // bottom left
+			400.0f, 300.0f   // bottom right
 		};
 
 		OpenGLLoader::glGenVertexArrays(1, &vao);
@@ -74,6 +118,15 @@ namespace Graphics
 		//use the compiled shader program
 		shader->Use();
 
+		kmat4 projection = Orthographic(
+			0.0f,
+			static_cast<float>(UI_Video::framebufferWidth),
+			static_cast<float>(UI_Video::framebufferHeight),
+			0.0f,
+			-1.0f,
+			1.0f
+		);
+		shader->SetMat4("u_Projection", projection);
 		shader->SetVec4("u_Color", kvec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 		//bind the VAO

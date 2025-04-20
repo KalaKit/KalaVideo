@@ -136,7 +136,6 @@ target_include_directories(KalaVideo PRIVATE
 	${EXT_WINDOW_DIR}
 	${EXT_CRASH_DIR}
 	${EXT_IMGUI_DIR}
-	${EXT_IMGUI_DIR}/backends
 )
 if(KALAKIT_X11)
 	target_include_directories(KalaVideo PRIVATE)
