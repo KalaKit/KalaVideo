@@ -16,12 +16,43 @@ External libraries included in this library:
 
 ---
 
-# Prerequisites (when compiling from source code)
+## Video Codec & Format Support
 
-## On Windows
+KalaVideo uses FFmpeg under the hood for decoding, editing, and exporting media. The following codecs and containers are supported out of the box:
+
+- **H.264 (`libx264`)**  
+  Universal, fast, and hardware-friendly. Common in `.mp4`, `.mkv`, `.mov`, `.ts`.
+
+- **H.265 / HEVC (`libx265`)**  
+  High-efficiency video (~30–50% smaller than H.264). Common in `.mp4`, `.mkv`, `.ts`.
+
+- **AV1 (`libaom`)**  
+  Royalty-free, excellent compression, used by YouTube. Found in `.webm`, `.mkv`.
+
+- **Supported Video Containers:**  
+  `.mp4`, `.mkv`, `.mov`, `.avi`, `.flv`, `.ts`, `.webm`
+
+---
+
+## Audio Codec & Format Support
+
+- **AAC (`libfdk-aac`)**  
+  High-quality audio for `.mp4`, `.mkv`, `.mov`, `.ts`.
+
+- **MP3 (`libmp3lame`)**  
+  Widely supported format used in `.mp3`, `.mp4`, `.mkv`.
+
+- **Supported Audio Containers:**  
+  `.mp3`, `.aac`, `.wav`, `.ogg`, `.flac`, `.webm`, `.mkv`, `.mp4`
+
+---
+
+## Prerequisites (when compiling from source code)
+
+### Windows
 
 > Read Windows_prerequisites.txt and use Windows_prerequisites.zip
 
-## On Linux
+### Linux
 
 > Read Linux_prerequisites.txt
