@@ -17,6 +17,7 @@
 
 //kalavideo
 #include "ui/ui_core.hpp"
+#include "ui/ui_mainmenubar.hpp"
 #include "ui/ui_video.hpp"
 #include "internal/ui_internal.hpp"
 
@@ -161,25 +162,9 @@ namespace UI
 
 			ImGui::NewFrame();
 
-			//
-			// TOP BAR START
-			//
-
-
-
-			//
-			// TOP BAR END
-			//
-		
-			//
-			// UI CONTENT START
-			//
+			UI_MainMenuBar::Update();
 
 			UI_Video::DrawVideoWindow();
-
-			//
-			// UI CONTENT END
-			//
 
 			ImGui::Render();
 

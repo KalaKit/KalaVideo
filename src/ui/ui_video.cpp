@@ -36,7 +36,7 @@ namespace UI
 			ImVec2(size.x, targetHeight),
 			ImGuiCond_Always);
 		ImGui::SetNextWindowPos(
-			ImVec2(0, 0),
+			ImVec2(0, 22),
 			ImGuiCond_Always);
 
 		ImGuiWindowFlags winFlags =
