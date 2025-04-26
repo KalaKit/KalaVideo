@@ -19,6 +19,9 @@
 #include "ui/ui_video.hpp"
 #include "graphics/graphics_core.hpp"
 #include "graphics/triangle.hpp"
+#include "video/video_player.hpp"
+#include "video/video_import.hpp"
+#include "graphics/quad.hpp"
 
 using std::string;
 using std::cout;
@@ -32,6 +35,8 @@ using KalaKit::KalaWindow;
 using UI::UI_Core;
 using UI::UI_Video;
 using Graphics::Triangle;
+using Video::VideoPlayer;
+using Video::VideoImport;
 
 namespace Graphics
 {
@@ -67,7 +72,6 @@ namespace Graphics
 			OpenGLLoader::glDisable(GL_DEPTH_TEST); //no depth test
 
 			Graphics_Core::FramebufferSetup();
-			Triangle::Initialize();
 
 			KalaWindow::SetRedrawCallback(Graphics_Core::Update);
 		}
@@ -129,7 +133,9 @@ namespace Graphics
 
 	void Graphics_Core::Update()
 	{
-		//render scene to framebuffer
+		//
+		// RENDER SCENE TO FRAMEBUFFER
+		//
 
 		OpenGLLoader::glBindFramebuffer(
 			GL_FRAMEBUFFER,
@@ -147,9 +153,35 @@ namespace Graphics
 			| GL_DEPTH_BUFFER_BIT
 		);
 
-		Triangle::Render();
+		//
+		// RENDER THE VIDEO QUAD
+		//
 
-		//render imgui to the default framebuffer
+		if (reachedFirstFrameEnd)
+		{
+			if (!isQuadInitialized)
+			{
+				Quad::Initialize();
+				isQuadInitialized = true;
+			}
+
+			static string firstVideo = "";
+			if (!VideoImport::importedVideos.empty())
+			{
+				if (firstVideo == "")
+				{
+					firstVideo = VideoImport::importedVideos.begin()->first;
+					cout << "Assigned '" << firstVideo << "' as playback video.\n";
+				}
+
+				VideoPlayer::RenderVideoFrame(firstVideo, Quad::textureID);
+				Quad::Render();
+			}
+		}
+
+		//
+		// RENDER IMGUI TO THE DEFAULT FRAMEBUFFER
+		//
 
 		OpenGLLoader::glBindFramebuffer(
 			GL_FRAMEBUFFER,
@@ -164,5 +196,7 @@ namespace Graphics
 		UI_Core::Update();
 
 		KalaWindow::SwapOpenGLBuffers();
+
+		if (!reachedFirstFrameEnd) reachedFirstFrameEnd = true;
 	}
 }

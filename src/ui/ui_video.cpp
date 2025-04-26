@@ -3,6 +3,8 @@
 //This is free software, and you are welcome to redistribute it under certain conditions.
 //Read LICENSE.md for more information.
 
+#include <iostream>
+
 //external
 #include "imgui.h"
 #include "opengl_loader.hpp"
@@ -11,6 +13,8 @@
 #include "ui/ui_video.hpp"
 #include "ui/ui_core.hpp"
 #include "graphics/graphics_core.hpp"
+
+using std::cout;
 
 using Graphics::Graphics_Core;
 using KalaKit::OpenGLLoader;
@@ -79,9 +83,6 @@ namespace UI
 			contentRegionMin.x + padding.x,
 			contentRegionMin.y + padding.y));
 
-		framebufferWidth = static_cast<int>(renderSize.x);
-		framebufferHeight = static_cast<int>(renderSize.y);
-
 		if (renderSize.x != framebufferWidth
 			|| renderSize.y != framebufferHeight)
 		{
@@ -127,11 +128,10 @@ namespace UI
 			framebufferHeight
 		);
 
-		OpenGLLoader::glViewport(
-			0,
-			0,
-			framebufferWidth,
-			framebufferHeight
-		);
+		OpenGLLoader::glBindFramebuffer(GL_FRAMEBUFFER, Graphics_Core::framebuffer);
+		OpenGLLoader::glViewport(0, 0, framebufferWidth, framebufferHeight);
+		OpenGLLoader::glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		OpenGLLoader::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		OpenGLLoader::glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 }

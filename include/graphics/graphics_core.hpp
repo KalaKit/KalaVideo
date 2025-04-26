@@ -10,6 +10,8 @@ namespace Graphics
 	class Graphics_Core
 	{
 	public:
+		static inline bool reachedFirstFrameEnd;
+		static inline bool isQuadInitialized;
 		static inline unsigned int framebuffer;
 		static inline unsigned int textureColorBuffer;
 		static inline unsigned int rbo;

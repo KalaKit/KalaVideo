@@ -5,11 +5,15 @@
 
 #pragma once
 
+#include <string>
+
 namespace Video
 {
+	using std::string;
+
 	class VideoPlayer
 	{
 	public:
-
+		static void RenderVideoFrame(const string& video, unsigned int textureID);
 	};
 }

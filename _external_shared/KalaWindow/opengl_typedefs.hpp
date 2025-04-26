@@ -125,6 +125,10 @@
 
 #define GL_FALSE 0
 
+//texture usage
+
+#define GL_TEXTURE0 0x84C0
+
 //buffer targets
 
 #define GL_ARRAY_BUFFER 0x8892
@@ -381,27 +385,30 @@ typedef void (APIENTRYP PFNGLUNIFORMMATRIX4FVPROC)(
 //textures
 
 typedef void (APIENTRYP PFNGLGENTEXTURESPROC)(
-    GLsizei n, 
+    GLsizei n,
     GLuint* textures);
 typedef void (APIENTRYP PFNGLBINDTEXTUREPROC)(
     GLenum target,
     GLuint texture);
+typedef void (APIENTRYP PFNGLACTIVETEXTUREPROC)(
+    GLenum texture);
 typedef void (APIENTRYP PFNGLTEXIMAGE2DPROC)(
-    GLenum target, 
-    GLint level, 
+    GLenum target,
+    GLint level,
     GLint internalFormat,
-    GLsizei width, 
-    GLsizei height, 
+    GLsizei width,
+    GLsizei height,
     GLint border,
-    GLenum format, 
-    GLenum type, 
+    GLenum format,
+    GLenum type,
     const void* data);
 typedef void (APIENTRYP PFNGLTEXPARAMETERIPROC)(
-    GLenum target, 
-    GLenum pname, 
+    GLenum target,
+    GLenum pname,
     GLint param);
 typedef void (APIENTRYP PFNGLGENERATEMIPMAPPROC)(
     GLenum target);
+
 
 //framebuffers and renderbuffers
 
