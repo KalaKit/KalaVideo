@@ -53,6 +53,6 @@ namespace Core
 		
 		avformat_free_context(ctx);
 		
-		cout << "Successfully initialized ffmpeg!\n";
+		cout << "[KALAKIT_FFMPEG | DEBUG] Successfully initialized ffmpeg!\n";
 	}
 }
