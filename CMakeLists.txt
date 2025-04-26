@@ -71,6 +71,7 @@ set(VIDEO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
 set(EXT_WINDOW_DIR "${CMAKE_SOURCE_DIR}/_external_shared/KalaWindow")
 set(EXT_CRASH_DIR "${CMAKE_SOURCE_DIR}/_external_shared/KalaCrashHandler")
 set(EXT_IMGUI_DIR "${CMAKE_SOURCE_DIR}/_external_shared/ImGui")
+set(EXT_FFMPEG_DIR "${CMAKE_SOURCE_DIR}/_external_shared/ffmpeg")
 
 # Add KalaWindow
 if (KALAKIT_WINDOWS)
@@ -99,6 +100,35 @@ else()
 		set(CRASH_LIBRARY_PATH "${EXT_CRASH_DIR}/release/libKalaCrashHandler.so")
 	else()
 		set(CRASH_LIBRARY_PATH "${EXT_CRASH_DIR}/debug/libKalaCrashHandlerD.so")
+	endif()
+endif()
+
+# Add ffmpeg
+if (KALAKIT_WINDOWS)
+	if(KALAKIT_RELEASE)
+		set(FFMPEG_LIBRARY_PATH_1 "${EXT_FFMPEG_DIR}/release/avcodec.lib")
+		set(FFMPEG_LIBRARY_PATH_2 "${EXT_FFMPEG_DIR}/release/avdevice.lib")
+		set(FFMPEG_LIBRARY_PATH_3 "${EXT_FFMPEG_DIR}/release/avfilter.lib")
+		set(FFMPEG_LIBRARY_PATH_4 "${EXT_FFMPEG_DIR}/release/avformat.lib")
+		set(FFMPEG_LIBRARY_PATH_5 "${EXT_FFMPEG_DIR}/release/avutil.lib")
+		set(FFMPEG_LIBRARY_PATH_6 "${EXT_FFMPEG_DIR}/release/postproc.lib")
+		set(FFMPEG_LIBRARY_PATH_7 "${EXT_FFMPEG_DIR}/release/swresample.lib")
+		set(FFMPEG_LIBRARY_PATH_8 "${EXT_FFMPEG_DIR}/release/swscale.lib")
+	else()
+		set(FFMPEG_LIBRARY_PATH_1 "${EXT_FFMPEG_DIR}/debug/avcodec.lib")
+		set(FFMPEG_LIBRARY_PATH_2 "${EXT_FFMPEG_DIR}/debug/avdevice.lib")
+		set(FFMPEG_LIBRARY_PATH_3 "${EXT_FFMPEG_DIR}/debug/avfilter.lib")
+		set(FFMPEG_LIBRARY_PATH_4 "${EXT_FFMPEG_DIR}/debug/avformat.lib")
+		set(FFMPEG_LIBRARY_PATH_5 "${EXT_FFMPEG_DIR}/debug/avutil.lib")
+		set(FFMPEG_LIBRARY_PATH_6 "${EXT_FFMPEG_DIR}/debug/postproc.lib")
+		set(FFMPEG_LIBRARY_PATH_7 "${EXT_FFMPEG_DIR}/debug/swresample.lib")
+		set(FFMPEG_LIBRARY_PATH_8 "${EXT_FFMPEG_DIR}/debug/swscale.lib")
+	endif()
+else()
+	if(KALAKIT_RELEASE)
+		#set(FFMPEG_LIBRARY_PATH_1 "${EXT_FFMPEG_DIR}/release/avcodec.so")
+	else()
+		#set(FFMPEG_LIBRARY_PATH_1 "${EXT_FFMPEG_DIR}/debug/avcodec.so")
 	endif()
 endif()
 
@@ -136,6 +166,7 @@ target_include_directories(KalaVideo PRIVATE
 	${EXT_WINDOW_DIR}
 	${EXT_CRASH_DIR}
 	${EXT_IMGUI_DIR}
+	${EXT_FFMPEG_DIR}
 )
 if(KALAKIT_X11)
 	target_include_directories(KalaVideo PRIVATE)
@@ -146,6 +177,14 @@ if (KALAKIT_WINDOWS)
 		opengl32
 		${CRASH_LIBRARY_PATH}
 		${WINDOW_LIBRARY_PATH}
+		${FFMPEG_LIBRARY_PATH_1}
+		${FFMPEG_LIBRARY_PATH_2}
+		${FFMPEG_LIBRARY_PATH_3}
+		${FFMPEG_LIBRARY_PATH_4}
+		${FFMPEG_LIBRARY_PATH_5}
+		${FFMPEG_LIBRARY_PATH_6}
+		${FFMPEG_LIBRARY_PATH_7}
+		${FFMPEG_LIBRARY_PATH_8}
 	)
 else()
 	target_link_libraries(KalaVideo PRIVATE
@@ -153,6 +192,14 @@ else()
 		${WINDOW_LIBRARY_PATH}
 		${CRASH_LIBRARY_PATH}
 		${X11_LIBRARIES}
+		${FFMPEG_LIBRARY_PATH_1}
+		${FFMPEG_LIBRARY_PATH_2}
+		${FFMPEG_LIBRARY_PATH_3}
+		${FFMPEG_LIBRARY_PATH_4}
+		${FFMPEG_LIBRARY_PATH_5}
+		${FFMPEG_LIBRARY_PATH_6}
+		${FFMPEG_LIBRARY_PATH_7}
+		${FFMPEG_LIBRARY_PATH_8}
 	)
 endif()
 

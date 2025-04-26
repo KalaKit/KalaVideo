@@ -17,10 +17,14 @@ pacman -S --needed base-devel mingw-w64-x86_64-toolchain nasm yasm pkg-config mi
 ---- FIRST TIME CONFIG END ----
 
 - go to the folder where this txt file is at (example: cd /c/Users/greenlaser/Documents/_cpp/KalaVideo/_external_shared/ffmpeg)
-- run 'bash build_all_any_platform.sh'
+- run 'bash build_all_windows.sh'
 
-NOTE: It may take a minute to boot up the Shared builds so don't worry if its not reporting any info for a little while
+==================================================
 
 --- SETUP FOR LINUX ---
 
-simply run bash ./build_all_any_platform.sh
+simply run bash ./build_all_linux.sh
+
+==================================================
+
+NOTE: It may take a minute to boot up the Shared builds so don't worry if its not reporting any info for a little while

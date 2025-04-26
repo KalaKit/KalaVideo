@@ -11,6 +11,7 @@
 
 //kalavideo
 #include "core/core.hpp"
+#include "core/ffmpeg.hpp"
 #include "ui/ui_core.hpp"
 #include "graphics/graphics_core.hpp"
 
@@ -27,6 +28,8 @@ namespace Core
 	{
 		//KalaWindow::SetDebugType(DebugType::DEBUG_FREETYPE_FONT_TEST);
 		Graphics_Core::Initialize();
+
+		Ffmpeg::Initialize();
 	}
 		
 	void KalaVideo::Update()
