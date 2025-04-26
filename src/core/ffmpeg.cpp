@@ -5,25 +5,32 @@
 
 #include <string>
 #include <iostream>
+#include <filesystem>
 
 //external
 extern "C"
 {
 #include "libavformat/avformat.h"
 }
-#include "platform.hpp"
 #include "window.hpp"
 
 //kalavideo
 #include "core/ffmpeg.hpp"
+#include "video/video_import.hpp"
+
+using std::string;
+using std::filesystem::current_path;
+using std::filesystem::create_directory;
+using std::filesystem::path;
+using std::filesystem::exists;
+using std::filesystem::directory_iterator;
+using std::cout;
 
 using KalaKit::KalaWindow;
 using KalaKit::PopupAction;
 using KalaKit::PopupType;
 using KalaKit::PopupResult;
-
-using std::string;
-using std::cout;
+using Video::VideoImport;
 
 namespace Core
 {
@@ -50,7 +57,32 @@ namespace Core
 		}
 		
 		avformat_free_context(ctx);
+
+		path videosFolder = path(current_path() / "videos");
+		if (!exists(videosFolder))
+		{
+			create_directory(videosFolder);
+			cout << "Created new videos folder: " << videosFolder << "\n";
+		}
+
+		for (const auto& file : directory_iterator(videosFolder))
+		{
+			string extension = path(file).extension().string();
+			if (extension == ".mp4"
+				|| extension == ".mov"
+				|| extension == ".mkv"
+				|| extension == ".webm")
+			{
+				string filePath = path(file).string();
+				VideoImport::ImportVideo(filePath);
+			}
+			else
+			{
+				string fileName = path(file).filename().string();
+				cout << "Error: Found invalid file " << fileName << " in videos folder! This should not be placed there.\n";
+			}
+		}
 		
-		cout << "[KALAKIT_FFMPEG | DEBUG] Successfully initialized ffmpeg!\n";
+		cout << "Successfully initialized ffmpeg!\n";
 	}
 }

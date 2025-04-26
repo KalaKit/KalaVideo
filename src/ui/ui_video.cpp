@@ -3,8 +3,6 @@
 //This is free software, and you are welcome to redistribute it under certain conditions.
 //Read LICENSE.md for more information.
 
-#include <iostream>
-
 //external
 #include "imgui.h"
 #include "opengl_loader.hpp"
@@ -16,8 +14,6 @@
 
 using Graphics::Graphics_Core;
 using KalaKit::OpenGLLoader;
-
-using std::cout;
 
 namespace UI
 {

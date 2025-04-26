@@ -4,6 +4,7 @@
 //Read LICENSE.md for more information.
 
 #include <iostream>
+#include <string>
 
 //external
 #include "window.hpp"
@@ -13,14 +14,17 @@
 #include "core/core.hpp"
 #include "core/ffmpeg.hpp"
 #include "ui/ui_core.hpp"
+#include "video/video_import.hpp"
 #include "graphics/graphics_core.hpp"
 
+using std::string;
 using std::cout;
 
 using KalaKit::KalaWindow;
 using KalaKit::OpenGL;
 using UI::UI_Core;
 using Graphics::Graphics_Core;
+using Video::VideoImport;
 
 namespace Core
 {
@@ -34,7 +38,7 @@ namespace Core
 		
 	void KalaVideo::Update()
 	{
-		cout << "[KALAKIT_VIDEO | DEBUG] Successfully reached render loop!\n";
+		cout << "Successfully reached render loop!\n";
 
 		while (!KalaWindow::ShouldClose())
 		{
@@ -46,8 +50,10 @@ namespace Core
 
 	void KalaVideo::Shutdown()
 	{
+		VideoImport::Shutdown();
+
 		UI_Core::Shutdown();
 
-		cout << "[KALAKIT_VIDEO | DEBUG] Successfully shut down KalaVideo!\n";
+		cout << "Successfully shut down KalaVideo!\n";
 	}
 }

@@ -6,14 +6,35 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 namespace Video
 {
 	using std::string;
+	using std::unordered_map;
+
+	struct VideoFile
+	{
+		void* formatCtx = nullptr; // AVFormatContext*
+		void* codecCtx = nullptr;  // AVCodecContext*
+		int videoStreamIndex = -1;
+	};
 
 	class VideoImport
 	{
 	public:
-		static void ImportVideo(const string& path);
+		static inline string failReason;
+		static inline unordered_map<string, VideoFile> importedVideos;
+
+		static bool ImportVideo(const string& filePath);
+		static bool OpenVideoFile(
+			const char* filePath,
+			void*& outFormatCtx, 
+			void*& outCodecCtx,
+			int& outVideoStreamIndex);
+
+		static void RemoveImportedVideo(const string& filePath);
+
+		static void Shutdown();
 	};
 }

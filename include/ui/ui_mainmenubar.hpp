@@ -11,5 +11,7 @@ namespace UI
 	{
 	public:
 		static void Update();
+	private:
+		static void ImportVideo();
 	};
 }

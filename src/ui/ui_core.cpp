@@ -6,6 +6,7 @@
 #ifdef KALAKIT_WINDOWS
 #include <windows.h>
 #endif
+#include <iostream>
 
 //external
 #include "imgui.h"
@@ -46,7 +47,7 @@ namespace UI
 
 		isInitialized = true;
 
-		cout << "[KALAKIT_VIDEO | DEBUG] Successfully initialized ImGui!\n";
+		cout << "Successfully initialized ImGui!\n";
 	}
 
 	void UI_Core::SetStyle()
@@ -188,7 +189,7 @@ namespace UI
 #endif
 			ImGui::DestroyContext();
 
-			cout << "[KALAKIT_VIDEO | DEBUG] Successfully shut down ImGui!\n";
+			cout << "Successfully shut down ImGui!\n";
 		}
 	}
 }

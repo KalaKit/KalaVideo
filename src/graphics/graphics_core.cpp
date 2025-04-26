@@ -8,9 +8,9 @@
 #endif
 #include <GL/GL.h>
 #include <string>
+#include <iostream>
 
 //external
-#include "platform.hpp"
 #include "opengl_loader.hpp"
 #include "window.hpp"
 
@@ -19,6 +19,9 @@
 #include "ui/ui_video.hpp"
 #include "graphics/graphics_core.hpp"
 #include "graphics/triangle.hpp"
+
+using std::string;
+using std::cout;
 
 using KalaKit::OpenGLLoader;
 using KalaKit::DebugType;
@@ -29,9 +32,6 @@ using KalaKit::KalaWindow;
 using UI::UI_Core;
 using UI::UI_Video;
 using Graphics::Triangle;
-
-using std::cout;
-using std::string;
 
 namespace Graphics
 {
@@ -46,7 +46,8 @@ namespace Graphics
 		if (!initialized)
 		{
 			string message = "Failed to initialize KalaWindow!\n";
-			cout << message;
+			
+			cout << message << "\n";
 
 			string title = "Initialize error";
 			PopupAction action = PopupAction::POPUP_ACTION_OK;

@@ -20,9 +20,9 @@ using UI::UI_Video;
 using std::filesystem::path;
 using std::filesystem::current_path;
 using std::string;
-using std::cout;
 using std::hex;
 using std::make_unique;
+using std::cout;
 
 namespace Graphics
 {
