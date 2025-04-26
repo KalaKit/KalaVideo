@@ -4,6 +4,7 @@
 //Read LICENSE.md for more information.
 
 #include <iostream>
+#include <string>
 
 //external
 #include "imgui.h"
@@ -13,8 +14,10 @@
 #include "ui/ui_mainmenubar.hpp"
 
 using KalaKit::KalaWindow;
+using KalaKit::FileType;
 
 using std::cout;
+using std::string;
 
 namespace UI
 {
@@ -43,12 +46,16 @@ namespace UI
 		{
 			if (ImGui::MenuItem("Import video"))
 			{
-				cout << "!!!! import video file\n";
+				string chosenFile = KalaWindow::FileExplorer(FileType::FILE_ANY_VIDEO);
+
+				cout << "chose video file: " << chosenFile << "\n";
 			}
 
 			if (ImGui::MenuItem("Import audio"))
 			{
-				cout << "!!!! import audio file\n";
+				string chosenFile = KalaWindow::FileExplorer(FileType::FILE_ANY_AUDIO);
+
+				cout << "chose audio file: " << chosenFile << "\n";
 			}
 
 			ImGui::EndMenu();
