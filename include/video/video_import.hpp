@@ -18,6 +18,7 @@ namespace Video
 		void* formatCtx = nullptr; // AVFormatContext*
 		void* codecCtx = nullptr;  // AVCodecContext*
 		int videoStreamIndex = -1;
+		bool canLoop = false;
 	};
 
 	class VideoImport
