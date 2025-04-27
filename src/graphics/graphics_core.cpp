@@ -9,6 +9,7 @@
 #include <GL/GL.h>
 #include <string>
 #include <iostream>
+#include <filesystem>
 
 //external
 #include "opengl_loader.hpp"
@@ -22,9 +23,12 @@
 #include "video/video_player.hpp"
 #include "video/video_import.hpp"
 #include "graphics/quad.hpp"
+#include "graphics/image.hpp"
 
 using std::string;
 using std::cout;
+using std::filesystem::path;
+using std::filesystem::current_path;
 
 using KalaKit::OpenGLLoader;
 using KalaKit::DebugType;
@@ -35,6 +39,7 @@ using KalaKit::KalaWindow;
 using UI::UI_Core;
 using UI::UI_Video;
 using Graphics::Triangle;
+using Graphics::Image;
 using Video::VideoPlayer;
 using Video::VideoImport;
 
@@ -67,14 +72,26 @@ namespace Graphics
 
 		if (initializeOpenGL)
 		{
-			OpenGLLoader::glDisable(GL_BLEND);      //no transparency
-			OpenGLLoader::glDisable(GL_CULL_FACE);  //don't discard faces
-			OpenGLLoader::glDisable(GL_DEPTH_TEST); //no depth test
+			//OpenGLLoader::glDisable(GL_BLEND);      //no transparency
+			//OpenGLLoader::glDisable(GL_CULL_FACE);  //don't discard faces
+			//OpenGLLoader::glDisable(GL_DEPTH_TEST); //no depth test
 
 			Graphics_Core::FramebufferSetup();
 
 			KalaWindow::SetRedrawCallback(Graphics_Core::Update);
 		}
+
+		path imagesPath = path(current_path() / "files" / "icons");
+		string icon_play = path(imagesPath / "icon_play.png").string();
+		string icon_pause = path(imagesPath / "icon_pause.png").string();
+		string icon_stop = path(imagesPath / "icon_stop.png").string();
+		string icon_restart = path(imagesPath / "icon_restart.png").string();
+		kvec2 size = kvec2(35.0f, 35.0f);
+
+		Image::ImportImage("icon_play", icon_play, size);
+		Image::ImportImage("icon_pause", icon_pause, size);
+		Image::ImportImage("icon_stop", icon_stop, size);
+		Image::ImportImage("icon_restart", icon_restart, size);
 
 		UI_Core::Initialize();
 	}

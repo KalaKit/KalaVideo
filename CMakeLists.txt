@@ -72,6 +72,7 @@ set(EXT_WINDOW_DIR "${CMAKE_SOURCE_DIR}/_external_shared/KalaWindow")
 set(EXT_CRASH_DIR "${CMAKE_SOURCE_DIR}/_external_shared/KalaCrashHandler")
 set(EXT_IMGUI_DIR "${CMAKE_SOURCE_DIR}/_external_shared/ImGui")
 set(EXT_FFMPEG_DIR "${CMAKE_SOURCE_DIR}/_external_shared/ffmpeg")
+set(EXT_STB_IMAGE_DIR "${CMAKE_SOURCE_DIR}/_external_shared/Stb_image")
 
 # Add KalaWindow
 if (KALAKIT_WINDOWS)
@@ -138,12 +139,9 @@ file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS
 	${VIDEO_SRC_DIR}/*/*.cpp
 	
 	# External source files
-	${EXT_IMGUI_DIR}/imgui.cpp
-	${EXT_IMGUI_DIR}/imgui_draw.cpp
-	${EXT_IMGUI_DIR}/imgui_tables.cpp
-	${EXT_IMGUI_DIR}/imgui_widgets.cpp
-	${EXT_IMGUI_DIR}/backends/imgui_impl_win32.cpp
-	${EXT_IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+	${EXT_IMGUI_DIR}/*.cpp
+	${EXT_IMGUI_DIR}/*/*.cpp
+	${EXT_STB_IMAGE_DIR}/*.cpp
 )
 
 # Build as Project executable
@@ -167,6 +165,7 @@ target_include_directories(KalaVideo PRIVATE
 	${EXT_CRASH_DIR}
 	${EXT_IMGUI_DIR}
 	${EXT_FFMPEG_DIR}
+	${EXT_STB_IMAGE_DIR}
 )
 if(KALAKIT_X11)
 	target_include_directories(KalaVideo PRIVATE)

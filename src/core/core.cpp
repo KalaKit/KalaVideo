@@ -16,6 +16,7 @@
 #include "ui/ui_core.hpp"
 #include "video/video_import.hpp"
 #include "graphics/graphics_core.hpp"
+#include "graphics/image.hpp"
 
 using std::string;
 using std::cout;
@@ -24,6 +25,7 @@ using KalaKit::KalaWindow;
 using KalaKit::OpenGL;
 using UI::UI_Core;
 using Graphics::Graphics_Core;
+using Graphics::Image;
 using Video::VideoImport;
 
 namespace Core
@@ -51,7 +53,7 @@ namespace Core
 	void KalaVideo::Shutdown()
 	{
 		VideoImport::Shutdown();
-
+		Image::Shutdown();
 		UI_Core::Shutdown();
 
 		cout << "Successfully shut down KalaVideo!\n";

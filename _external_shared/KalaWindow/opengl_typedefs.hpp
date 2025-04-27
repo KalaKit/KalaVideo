@@ -421,6 +421,9 @@ typedef void (APIENTRYP PFNGLTEXPARAMETERIPROC)(
     GLint param);
 typedef void (APIENTRYP PFNGLGENERATEMIPMAPPROC)(
     GLenum target);
+typedef void (APIENTRYP PFNGLDELETETEXTURESPROC)(
+    GLsizei n,
+    const GLuint* textures);
 
 //framebuffers and renderbuffers
 

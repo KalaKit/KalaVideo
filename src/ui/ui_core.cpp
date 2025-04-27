@@ -169,7 +169,7 @@ namespace UI
 
 			float height = UI_Video::DrawVideoWindow();
 			UI_Buttons::DrawVideoButtons(height + 20.0f);
-			UI_Editor::DrawVideoEditor(height + 80.0f);
+			UI_Editor::DrawVideoEditor(height + 78.0f);
 
 			ImGui::Render();
 

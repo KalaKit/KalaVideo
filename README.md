@@ -12,6 +12,7 @@ External libraries included in this library:
 
 - [ImGui](https://github.com/ocornut/imgui) – UI for KalaVideo  
 - [FFmpeg](https://ffmpeg.org) – video and audio edit and export  
+- [Stb_image](https://github.com/nothings/stb) – image import
 - [miniaudio](https://github.com/mackron/miniaudio) – audio playback
 
 ---

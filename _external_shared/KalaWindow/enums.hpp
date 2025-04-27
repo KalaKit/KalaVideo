@@ -263,6 +263,7 @@ namespace KalaKit
 		OPENGL_TEXSUBIMAGE2D,           //Upload a sub-region of texture data
 		OPENGL_TEXPARAMETERI,           //Set texture parameter (filtering/wrapping)
 		OPENGL_GENERATEMIPMAP,          //Generate mipmaps for the current texture
+		OPENGL_DELETETEXTURES,          //Delete one or more textures
 
 		//framebuffers and renderbuffers
 

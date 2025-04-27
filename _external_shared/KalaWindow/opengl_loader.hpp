@@ -106,6 +106,7 @@ namespace KalaKit
 		static PFNGLTEXSUBIMAGE2DPROC          glTexSubImage2D;           //Upload a sub-region of texture data
 		static PFNGLTEXPARAMETERIPROC          glTexParameteri;           //Set texture parameter (filtering/wrapping)
 		static PFNGLGENERATEMIPMAPPROC         glGenerateMipmap;          //Generate mipmaps for the current texture
+		static PFNGLDELETETEXTURESPROC         glDeleteTextures;          //Delete one or more textures
 
 		//framebuffers and renderbuffers
 
