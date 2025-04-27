@@ -18,7 +18,7 @@ namespace UI
 		/// <summary>
 		/// The main window that displays the video currently loaded into KalaVideo.
 		/// </summary>
-		static void DrawVideoWindow();
+		static float DrawVideoWindow();
 	private:
 		static void DrawVideoWindowContent();
 		static void UpdateFramebuffer(kvec2 renderSize);

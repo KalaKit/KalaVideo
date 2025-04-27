@@ -260,6 +260,7 @@ namespace KalaKit
 		OPENGL_BINDTEXTURE,             //Bind a texture
 		OPENGL_ACTIVETEXTURE,           //Select active texture unit
 		OPENGL_TEXIMAGE2D,              //Upload texture data
+		OPENGL_TEXSUBIMAGE2D,           //Upload a sub-region of texture data
 		OPENGL_TEXPARAMETERI,           //Set texture parameter (filtering/wrapping)
 		OPENGL_GENERATEMIPMAP,          //Generate mipmaps for the current texture
 

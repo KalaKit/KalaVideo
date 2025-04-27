@@ -15,10 +15,11 @@ namespace Video
 
 	struct VideoFile
 	{
+		bool canLoop = false;
 		void* formatCtx = nullptr; // AVFormatContext*
 		void* codecCtx = nullptr;  // AVCodecContext*
 		int videoStreamIndex = -1;
-		bool canLoop = false;
+		float framerate = 60.0f;
 	};
 
 	class VideoImport

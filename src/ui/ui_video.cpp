@@ -24,14 +24,14 @@ namespace UI
 	static ImVec2 windowMinSize = ImVec2(300, 300);
 	static ImVec2 windowMaxSize = ImVec2(FLT_MAX, FLT_MAX);
 
-	void UI_Video::DrawVideoWindow()
+	float UI_Video::DrawVideoWindow()
 	{
 		ImGui::SetNextWindowSizeConstraints(
 			windowMinSize,
 			windowMaxSize);
 
 		ImVec2 size = ImGui::GetMainViewport()->Size;
-		float targetHeight = size.y * 0.85f;
+		float targetHeight = size.y * 0.65f;
 		ImGui::SetNextWindowSize(
 			ImVec2(size.x, targetHeight),
 			ImGuiCond_Always);
@@ -45,11 +45,13 @@ namespace UI
 			| ImGuiWindowFlags_NoSavedSettings
 			| ImGuiWindowFlags_NoTitleBar;
 
-		if (ImGui::Begin("Video", nullptr, winFlags))
+		if (ImGui::Begin("VideoPlayer", nullptr, winFlags))
 		{
 			DrawVideoWindowContent();
 			ImGui::End();
 		}
+
+		return targetHeight;
 	}
 
 	void UI_Video::DrawVideoWindowContent()

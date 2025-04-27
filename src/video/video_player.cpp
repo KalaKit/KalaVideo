@@ -20,12 +20,16 @@ extern "C"
 //kalavideo
 #include "video/video_player.hpp"
 #include "video/video_import.hpp"
+#include "ui/ui_video.hpp"
+#include "graphics/quad.hpp"
 
 using std::cout;
 using std::unordered_map;
 
 using Video::VideoFile;
 using KalaKit::OpenGLLoader;
+using Graphics::Quad;
+using UI::UI_Video;
 
 namespace Video
 {
@@ -138,8 +142,29 @@ namespace Video
 							rgbFrame->linesize
 						);
 
-						//upload to opengl
 						OpenGLLoader::glBindTexture(GL_TEXTURE_2D, textureID);
+
+						if (currentWidth != UI_Video::framebufferWidth
+							|| currentHeight != UI_Video::framebufferHeight)
+						{
+							//reallocate texture if size changes
+							OpenGLLoader::glTexImage2D(
+								GL_TEXTURE_2D,
+								0,
+								GL_RGB,
+								width,
+								height,
+								0,
+								GL_RGB,
+								GL_UNSIGNED_BYTE,
+								nullptr
+							);
+
+							currentWidth = UI_Video::framebufferWidth;
+							currentHeight = UI_Video::framebufferHeight;
+						}
+
+						//upload to opengl
 						OpenGLLoader::glTexSubImage2D(
 							GL_TEXTURE_2D,
 							0,
@@ -175,6 +200,11 @@ namespace Video
 	void VideoPlayer::Pause(const string& video)
 	{
 		videoStates[video] = VideoState::VIDEO_PAUSED;
+
+		OpenGLLoader::glBindTexture(GL_TEXTURE_2D, Quad::textureID);
+		OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+		OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 3);
+		OpenGLLoader::glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	void VideoPlayer::Stop(const string& video)
 	{
@@ -188,6 +218,11 @@ namespace Video
 			if (formatCtx)
 			{
 				av_seek_frame(formatCtx, vf.videoStreamIndex, 0, AVSEEK_FLAG_BACKWARD);
+
+				OpenGLLoader::glBindTexture(GL_TEXTURE_2D, Quad::textureID);
+				OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+				OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 3);
+				OpenGLLoader::glGenerateMipmap(GL_TEXTURE_2D);
 			}
 		}
 	}
@@ -228,6 +263,41 @@ namespace Video
 				}
 
 				videoStates[video] = VideoState::VIDEO_PLAYING;
+			}
+		}
+	}
+	void VideoPlayer::SetVideoCustomFramerate(const string& video, float framerate)
+	{
+		auto it = VideoImport::importedVideos.find(video);
+		if (it != VideoImport::importedVideos.end())
+		{
+			VideoFile& vf = it->second;
+			vf.framerate = framerate;
+		}
+	}
+	void VideoPlayer::SetVideoDefaultFramerate(const string& video)
+	{
+		auto it = VideoImport::importedVideos.find(video);
+		if (it != VideoImport::importedVideos.end())
+		{
+			VideoFile& vf = it->second;
+			AVFormatContext* formatCtx = static_cast<AVFormatContext*>(vf.formatCtx);
+			if (formatCtx)
+			{
+				AVStream* stream = formatCtx->streams[vf.videoStreamIndex];
+				if (stream)
+				{
+					AVRational fr = stream->avg_frame_rate;
+					if (fr.num != 0
+						&& fr.den != 0)
+					{
+						vf.framerate =
+							static_cast<float>(fr.num)
+							/ static_cast<float>(fr.den);
+					}
+					//fallback if avg_frame_rate is invalid
+					else vf.framerate = 60.0f;
+				}
 			}
 		}
 	}
@@ -295,6 +365,17 @@ namespace Video
 			}
 		}
 		return 0.0;
+	}
+	float VideoPlayer::GetVideoFramerate(const string& video)
+	{
+		auto it = VideoImport::importedVideos.find(video);
+		if (it != VideoImport::importedVideos.end())
+		{
+			VideoFile& vf = it->second;
+			return vf.framerate;
+		}
+
+		return 0.0f;
 	}
 
 	void VideoPlayer::VideoEndCheck(const string& video)

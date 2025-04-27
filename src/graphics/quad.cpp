@@ -125,6 +125,47 @@ namespace Graphics
 
 		shader->Use();
 		shader->SetInt("u_Texture", 0);
+
+		//create the texture
+		OpenGLLoader::glGenTextures(1, &textureID);
+		OpenGLLoader::glBindTexture(GL_TEXTURE_2D, textureID);
+		OpenGLLoader::glTexImage2D(
+			GL_TEXTURE_2D,
+			0,
+			GL_RGB,
+			1,
+			1,
+			0,
+			GL_RGB,
+			GL_UNSIGNED_BYTE,
+			nullptr
+		);
+
+		//set sampler parameters
+		OpenGLLoader::glTexParameteri(
+			GL_TEXTURE_2D,
+			GL_TEXTURE_MIN_FILTER,
+			GL_LINEAR
+		);
+		OpenGLLoader::glTexParameteri(
+			GL_TEXTURE_2D,
+			GL_TEXTURE_MAG_FILTER,
+			GL_LINEAR
+		);
+		OpenGLLoader::glTexParameteri(
+			GL_TEXTURE_2D,
+			GL_TEXTURE_WRAP_S,
+			GL_CLAMP_TO_EDGE
+		);
+		OpenGLLoader::glTexParameteri(
+			GL_TEXTURE_2D,
+			GL_TEXTURE_WRAP_T,
+			GL_CLAMP_TO_EDGE
+		);
+
+		OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+		OpenGLLoader::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 3);
+		OpenGLLoader::glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	void Quad::Render()

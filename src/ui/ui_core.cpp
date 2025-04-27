@@ -20,6 +20,8 @@
 #include "ui/ui_core.hpp"
 #include "ui/ui_mainmenubar.hpp"
 #include "ui/ui_video.hpp"
+#include "ui/ui_buttons.hpp"
+#include "ui/ui_editor.hpp"
 #include "internal/ui_internal.hpp"
 
 using std::cout;
@@ -165,7 +167,9 @@ namespace UI
 
 			UI_MainMenuBar::Update();
 
-			UI_Video::DrawVideoWindow();
+			float height = UI_Video::DrawVideoWindow();
+			UI_Buttons::DrawVideoButtons(height + 20.0f);
+			UI_Editor::DrawVideoEditor(height + 80.0f);
 
 			ImGui::Render();
 
