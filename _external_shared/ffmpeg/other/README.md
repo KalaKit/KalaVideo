@@ -1,4 +1,4 @@
-This folder contains binaries copied from `C:\msys64\mingw64` that are required for FFmpeg on Windows to function with the binaries I have built for use with KalaVideo. These binaries were not built by me and are provided by MSYS2.
+This folder contains binaries copied from `C:\msys64\mingw64\bin` that are required for FFmpeg on Windows to function with the binaries I have built for use with KalaVideo. These binaries were not built by me and are provided by MSYS2.
 
 | DLL Name             | Description |
 |----------------------|-------------|
